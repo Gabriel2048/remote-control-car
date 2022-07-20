@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,38 +22,34 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  MyHomePage({Key? key}) : super(key: key);
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
 
-// ignore: prefer_const_constructors
-  final a = FlutterBlue.instance.startScan(scanMode: ScanMode.lowLatency);
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final FlutterBluePlus flutterBlue = FlutterBluePlus.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    flutterBlue.startScan();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Center(
-          child: StreamBuilder(
-            stream: FlutterBlue.instance.scanResults,
-            builder: (_, AsyncSnapshot<List<ScanResult>> snapshot) =>
-                ListView.builder(
-              itemCount: snapshot.data?.length,
-              itemBuilder: (_, int index) {
-                if (snapshot.data == null || snapshot.data!.isEmpty) {
-                  final state = snapshot.connectionState.name;
-                  return Text(
-                    '$state empty',
-                    key: const Key('1'),
-                  );
-                }
-                final title = snapshot.data?[index].device.name ?? 'no name';
-                return Text(
-                  title,
-                  key: Key(snapshot.data![index].device.id.id),
-                );
-              },
-            ),
-          ),
-        ), // This trailing comma makes auto-formatting nicer for build methods.
+        body: StreamBuilder<List<ScanResult>>(
+          stream: flutterBlue.scanResults,
+          builder: (_, snapshot) => Center(
+              child: ListView.builder(
+                  itemBuilder: (_, a) =>
+                      Text(snapshot.data?[a].device.name ?? ''),
+                  itemCount: snapshot.data?.length)),
+        ),
       ),
     );
   }
