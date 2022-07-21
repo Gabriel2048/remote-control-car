@@ -22,8 +22,8 @@ jobs:
           version: 3.0.0
 
       - name: Install dependencies
-        run: cd remote_car_app && flutter pub get && cd..
-        shell: cmd
+        run: flutter pub get
+        working-directory: remote_car_app
 
       - name: Analyze source code
         run: dart analyze --fatal-infos
