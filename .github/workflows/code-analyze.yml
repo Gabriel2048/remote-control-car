@@ -14,8 +14,6 @@ jobs:
       image: dart:latest
 
     steps:
-      - uses: actions/checkout@v3
-      
       - name: Install Flutter
         uses: britannio/action-install-flutter@v1.1
         with:
@@ -26,7 +24,7 @@ jobs:
         working-directory: remote_car_app
 
       - name: Analyze source code
-        run: dart analyze --fatal-infos
+        run: flutter analyze --fatal-infos
         working-directory: remote_car_app
 
   analyze_embedded_app:
@@ -35,8 +33,6 @@ jobs:
       image: dart:latest
 
     steps:
-      - uses: actions/checkout@v3
-        
       - name: Install Embedded dependencies
         run: dart pub get
         working-directory: embedded_controller
