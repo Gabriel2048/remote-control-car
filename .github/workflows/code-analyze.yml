@@ -5,15 +5,14 @@
 
 name: Code Analyze
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on:on: [push, workflow_dispatch]
 
 jobs:
   analyze:
     runs-on: ubuntu-latest
+
+    env:
+      FLUTTER_VERSION: "3.0.0"
 
     steps:
       - uses: actions/checkout@v3
