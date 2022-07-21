@@ -5,14 +5,11 @@
 
 name: Code Analyze
 
-on:on: [push, workflow_dispatch]
+on: [push, workflow_dispatch]
 
 jobs:
   analyze:
     runs-on: ubuntu-latest
-
-    env:
-      FLUTTER_VERSION: "3.0.0"
 
     steps:
       - uses: actions/checkout@v3
@@ -26,6 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: cd remote_car_app && flutter pub get && cd..
+        shell: cmd
 
       - name: Analyze source code
         run: dart analyze --fatal-infos
