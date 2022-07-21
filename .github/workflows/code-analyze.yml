@@ -8,7 +8,7 @@ name: Code Analyze
 on: [push, workflow_dispatch]
 
 jobs:
-  analyze:
+  analyze_mobile_app:
     runs-on: ubuntu-latest
     container:
       image: dart:latest
@@ -24,6 +24,18 @@ jobs:
       - name: Install App dependencies
         run: flutter pub get
         working-directory: remote_car_app
+
+      - name: Analyze source code
+        run: dart analyze --fatal-infos
+        working-directory: remote_car_app
+
+  analyze_embedded_app:
+    runs-on: ubuntu-latest
+    container:
+      image: dart:latest
+
+    steps:
+      - uses: actions/checkout@v3
         
       - name: Install Embedded dependencies
         run: dart pub get
