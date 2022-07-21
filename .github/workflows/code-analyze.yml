@@ -43,6 +43,7 @@ jobs:
 
       - name: Analyze source code
         run: dart analyze --fatal-infos
+        working-directory: embedded_controller
 
       # Your project will need to have tests in test/ and a dependency on
       # package:test for this step to succeed. Note that Flutter projects will
