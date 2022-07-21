@@ -14,6 +14,8 @@ jobs:
       image: dart:latest
 
     steps:
+      - uses: actions/checkout@v3
+
       - name: Install Flutter
         uses: britannio/action-install-flutter@v1.1
         with:
@@ -33,6 +35,8 @@ jobs:
       image: dart:latest
 
     steps:
+      - uses: actions/checkout@v3
+
       - name: Install Embedded dependencies
         run: dart pub get
         working-directory: embedded_controller
