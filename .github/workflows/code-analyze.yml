@@ -21,9 +21,13 @@ jobs:
         with:
           version: 3.0.5
 
-      - name: Install dependencies
+      - name: Install App dependencies
         run: flutter pub get
         working-directory: remote_car_app
+        
+      - name: Install Embedded dependencies
+        run: dart pub get
+        working-directory: embedded_controller
 
       - name: Analyze source code
         run: dart analyze --fatal-infos
