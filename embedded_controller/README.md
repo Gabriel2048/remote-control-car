@@ -1,2 +1,1 @@
-A sample command-line application with an entrypoint in `bin/`, library code
-in `lib/`, and example unit test in `test/`.
+An embedded console application written in Dart (https://dart.dev/) for controlling a Raspberry-pi board.
